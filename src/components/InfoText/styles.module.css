@@ -1,0 +1,11 @@
+.container {
+	background: #D3D4D8;
+	border-radius: 50px;
+	padding: 4px 10px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 12px;
+	line-height: 16px;
+	color: #505565;
+}

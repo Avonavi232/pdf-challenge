@@ -1,0 +1,12 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 8px
+}
+
+.label {
+	font-size: 12px;
+	line-height: 16px;
+	color: #8B90A0;
+	white-space: nowrap;
+}
