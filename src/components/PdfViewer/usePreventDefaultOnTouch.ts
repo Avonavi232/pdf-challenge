@@ -12,5 +12,5 @@ export const usePreventDefaultOnTouch = () => {
         document.addEventListener('touchmove', handler, { passive: false });
 
         return () => document.removeEventListener('touchmove', handler);
-    })
+    }, [])
 }
