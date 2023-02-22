@@ -25,6 +25,14 @@ export const Page = memo(forwardRef<HTMLDivElement, TCustomPageProps>((props, re
     const dprRef = useRef(window.devicePixelRatio || 1);
     const loadTimeRef = useRef(performance.now());
 
+    /**
+     * Reinit rendering start point, when deps changed.
+     * Deps must include values, which cause page redraw (ex. scale).
+     * */
+    useEffect(() => () => {
+        loadTimeRef.current = performance.now();
+    }, [ scale ])
+
     /** Cleanup when page is unmounted */
     useEffect(() => () => {
         if (objectUrl) {
@@ -38,9 +46,8 @@ export const Page = memo(forwardRef<HTMLDivElement, TCustomPageProps>((props, re
         if (page.pageNumber === 1) {
             const endTime = performance.now();
             setLoadTime(endTime - loadTimeRef.current);
-            loadTimeRef.current = endTime;
         }
-    }, [setLoadTime])
+    }, [ setLoadTime ])
 
     /** Add additional gap between react-window rows */
     const preparedStyle = useMemo(() => ({
@@ -69,7 +76,7 @@ export const Page = memo(forwardRef<HTMLDivElement, TCustomPageProps>((props, re
             const nextObjectUrl = URL.createObjectURL(blob!);
             setObjectUrl(nextObjectUrl);
         }, 'image/png');
-    }, [measurePerformance, objectUrl])
+    }, [ measurePerformance, objectUrl ])
 
     const canvas = canvasRef.current;
     const dpr = dprRef.current;
